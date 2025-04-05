@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to MediLog</h1>
+    <p class="lead">Your personal medication tracker</p>
+    <hr class="my-4">
+    {% if current_user.is_authenticated %}
+        <p>Manage your medications and stay on top of your health.</p>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('main.medications') }}" role="button">View Medications</a>
+    {% else %}
+        <p>Please login or register to start tracking your medications.</p>
+        <a class="btn btn-primary btn-lg me-2" href="{{ url_for('auth.login') }}" role="button">Login</a>
+        <a class="btn btn-secondary btn-lg" href="{{ url_for('auth.register') }}" role="button">Register</a>
+    {% endif %}
+</div>
+{% endblock %}

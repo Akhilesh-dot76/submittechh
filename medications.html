@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}My Medications{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>My Medications</h2>
+    <a href="{{ url_for('main.add_medication') }}" class="btn btn-success">Add New Medication</a>
+</div>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Active Medications</h5>
+                <p class="card-text display-4">{{ active_count }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card text-white bg-secondary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Discontinued Medications</h5>
+                <p class="card-text display-4">{{ discontinued_count }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-4">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Filter and Sort</span>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="btn-group" role="group">
+                    <a href="{{ url_for('main.medications') }}" 
+                       class="btn btn-outline-primary {% if not current_filter %}active{% endif %}">
+                        All
+                    </a>
+                    <a href="{{ url_for('main.medications', status='Active') }}" 
+                       class="btn btn-outline-primary {% if current_filter == 'Active' %}active{% endif %}">
+                        Active
+                    </a>
+                    <a href="{{ url_for('main.medications', status='Discontinued') }}" 
+                       class="btn btn-outline-primary {% if current_filter == 'Discontinued' %}active{% endif %}">
+                        Discontinued
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="btn-group float-md-end" role="group">
+                    <a href="{{ url_for('main.medications', sort='name', **(request.args.to_dict(False) if request.args else {})) }}" 
+                       class="btn btn-outline-secondary {% if current_sort == 'name' %}active{% endif %}">
+                        Sort by Name
+                    </a>
+                    <a href="{{ url_for('main.medications', sort='date', **(request.args.to_dict(False) if request.args else {})) }}" 
+                       class="btn btn-outline-secondary {% if current_sort == 'date' %}active{% endif %}">
+                        Sort by Date
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if medications %}
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Dosage</th>
+                <th>Frequency</th>
+                <th>Start Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for med in medications %}
+            <tr>
+                <td>{{ med.name }}</td>
+                <td>{{ med.dosage }}</td>
+                <td>{{ med.frequency }}</td>
+                <td>{{ med.start_date.strftime('%Y-%m-%d') }}</td>
+                <td>
+                    <span class="badge bg-{% if med.status == 'Active' %}success{% else %}secondary{% endif %}">
+                        {{ med.status }}
+                    </span>
+                </td>
+                <td>
+                    <a href="{{ url_for('main.medication', id=med.id) }}" class="btn btn-sm btn-info">View</a>
+                    <a href="{{ url_for('main.edit_medication', id=med.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <form action="{{ url_for('main.delete_medication', id=med.id) }}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-danger" 
+                                onclick="return confirm('Are you sure you want to delete this medication?')">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% else %}
+<div class="alert alert-info">No medications found. Add your first medication!</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,142 @@
+:root {
+    /* Color Palette */
+    --bg-dark: #121212;           /* Dark background */
+    --bg-darker: #000000;         /* Pure black for contrast */
+    --primary: #4fc3f7;           /* Light blue - primary accent */
+    --secondary: #81c784;         /* Soft green - secondary accent */
+    --accent: #ff8a65;            /* Coral - for important actions */
+    --text-light: #e0e0e0;        /* Light gray text */
+    --text-lighter: #ffffff;      /* Pure white for headings */
+    --danger: #ff5252;            /* Red for warnings/errors */
+    --success: #69f0ae;           /* Bright green for success */
+    --warning: #ffd740;           /* Yellow for warnings */
+  }
+  
+  /* Base Styles */
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  
+  /* Navigation Bar */
+  .navbar {
+    background-color: var(--bg-darker) !important;
+    border-bottom: 1px solid var(--primary);
+  }
+  
+  .navbar-brand {
+    color: var(--primary) !important;
+    font-weight: bold;
+  }
+  
+  .nav-link {
+    color: var(--text-light) !important;
+    transition: color 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: var(--primary) !important;
+  }
+  
+  /* Cards & Containers */
+  .card {
+    background-color: var(--bg-darker);
+    border: 1px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+  }
+  
+  .card-header {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid #333;
+    color: var(--primary);
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: #000;
+    font-weight: 500;
+  }
+  
+  .btn-primary:hover {
+    background-color: #3da8d8;
+    border-color: #3da8d8;
+  }
+  
+  .btn-outline-primary {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: #000;
+  }
+  
+  /* Forms */
+  .form-control {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    color: var(--text-light);
+  }
+  
+  .form-control:focus {
+    background-color: #2a2a2a;
+    border-color: var(--primary);
+    color: var(--text-light);
+    box-shadow: 0 0 0 0.25rem rgba(79, 195, 247, 0.25);
+  }
+  
+  /* Tables */
+  .table {
+    color: var(--text-light);
+  }
+  
+  .table th {
+    border-color: #333;
+  }
+  
+  .table td {
+    border-color: #333;
+  }
+  
+  /* Alerts */
+  .alert-success {
+    background-color: rgba(105, 240, 174, 0.2);
+    border-color: var(--success);
+    color: var(--success);
+  }
+  
+  .alert-danger {
+    background-color: rgba(255, 82, 82, 0.2);
+    border-color: var(--danger);
+    color: var(--danger);
+  }
+  
+  /* Special Elements for Medical Log */
+  .medication-active {
+    border-left: 4px solid var(--success);
+  }
+  
+  .medication-discontinued {
+    border-left: 4px solid var(--danger);
+  }
+  
+  /* Footer */
+  .footer {
+    background-color: var(--bg-darker);
+    border-top: 1px solid #333;
+    color: var(--text-light);
+    padding: 1.5rem 0;
+  }
